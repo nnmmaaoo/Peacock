@@ -101,8 +101,8 @@ export function calculateGlobalXp(
             continue
         }
 
-        const challengeXp = challenge.Xp * data.timesCompleted
-        totalXp += challengeXp
+        const challengeXp = challenge.Xp * data.timesCompleted * 3
+        totalXp += challengeXp 
 
         const challengeData = {
             ChallengeId: challenge.Id,
@@ -719,7 +719,7 @@ export async function getMissionEndData(
         gameVersion,
     )
     let justTickedChallenges = 0
-    let totalXpGain = calculateXpResult.xp
+    let totalXpGain = calculateXpResult.xp * 3
 
     // Calculate XP based on non-global challenges. Remember to add elusive challenges of the contract
     Object.values({
@@ -748,7 +748,7 @@ export async function getMissionEndData(
 
             justTickedChallenges++
 
-            totalXpGain += challengeData.Rewards.MasteryXP
+            totalXpGain += challengeData.Rewards.MasteryXP * 3
 
             calculateXpResult.completedChallenges.push({
                 ChallengeId: challengeData.Id,
@@ -756,7 +756,7 @@ export async function getMissionEndData(
                 ChallengeName: challengeData.Name,
                 ChallengeImageUrl: challengeData.ImageName,
                 ChallengeDescription: challengeData.Description,
-                XPGain: challengeData.Rewards.MasteryXP,
+                XPGain: challengeData.Rewards.MasteryXP *3, 
                 IsGlobal: false,
                 IsActionReward: challengeData.Tags.includes("actionreward"),
                 Drops: challengeData.Drops,
@@ -777,7 +777,7 @@ export async function getMissionEndData(
         : completionData.XP - totalXpGain
     let oldLocationLevel = levelForXp(oldLocationXp)
 
-    const newLocationXp = completionData.XP
+    const newLocationXp = completionData.XP * 3
     let newLocationLevel = levelForXp(newLocationXp)
 
     if (!query.masteryUnlockableId) {

@@ -134,6 +134,31 @@ export const STEAM_NAMESPACE_2018 = "863550"
 export const EPIC_NAMESPACE_2021 = "ed55aa5edc5941de92fd7f64de415793"
 export const STEAM_NAMESPACE_2021 = "1659040"
 
+export const H1_ENTITLEMENTS = [
+    "439870",
+    "439890",
+    "440930",
+    "440940",
+    "440960",
+    "440961",
+    "440962",
+    "505180",
+    "588780",
+]
+
+export const H3_ENTITLEMENTS = [
+    "2828470", "2475260", "2184791", "2184790", "1843460", "1829605", "1829604", "1829603", "1829602", "1829601", "1829600", "1829596", "1829595", "1829594", "1829593", "1829592", "1829591", "1829590", "1829587", "1829586", "1829585", "1829584", "1829583", "1829582", "1829581", "1829580"
+]
+
+export const FULL_ENTITLEMENTS = [
+    STEAM_NAMESPACE_2016,
+    EPIC_NAMESPACE_2016,
+    STEAM_NAMESPACE_2018,
+    EPIC_NAMESPACE_2021,
+    STEAM_NAMESPACE_2021,
+    STEAM_NAMESPACE_SCPC,
+].concat(H1_ENTITLEMENTS).concat(H2_STEAM_ENTITLEMENTS).concat(H3_ENTITLEMENTS).concat(H3_EPIC_ENTITLEMENTS)
+
 export const FRANKENSTEIN_SNIPER_ENTITLEMENTS = [STEAM_NAMESPACE_2016, "783781"]
 
 export function getPlatformEntitlements(
@@ -142,8 +167,7 @@ export function getPlatformEntitlements(
 ): void {
     log(LogLevel.DEBUG, `Platform issuer: ${req.body.issuerId}`)
 
-    const exts = getUserData(req.jwt.unique_name, req.gameVersion).Extensions
-        .entP
+    const exts = FULL_ENTITLEMENTS
 
     res.json(exts)
 }
